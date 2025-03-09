@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 export default function Main() {
 
@@ -7,6 +7,22 @@ export default function Main() {
     bottomText: "Walk into Mordor",
     imageUrl: "http://i.imgflip.com/1bij.jpg"
   });
+
+  const [allMemes, setAllMemes] = useState([]);
+
+  useEffect(() => {
+    fetch("https://api.imgflip.com/get_memes")
+      .then(res => res.json())
+      .then(res => setAllMemes(data.data.memes))
+  }, []);
+
+  function handleChange(event) {
+    const { value, name } = event.currentTarget;
+    setMeme(prevMeme => ({
+      ...prevMeme,
+      [name]: value
+    }));
+  }
 
   return (
     <main>
@@ -17,7 +33,7 @@ export default function Main() {
             placeholder="One does not simply"
             name="topText"
             value={meme.topText}
-            onChange={(e) => setMeme({ ...meme, topText: e.target.value })}
+            onChange={handleChange}
           />
         </label>
 
@@ -27,7 +43,7 @@ export default function Main() {
             placeholder="Walk into Mordor"
             name="bottomText"
             value={meme.bottomText}
-            onChange={(e) => setMeme({ ...meme, bottomText: e.target.value })}
+            onChange={handleChange}
           />
         </label>
         <button>Get a new meme image 🖼</button>
