@@ -11,7 +11,7 @@ A React application that allows users to create custom memes with personalized t
 
 ## Demo
 
-![Meme Generator Demo](public\meme-generator-screenshot.png)
+![Meme Generator Demo](/public/meme-generator-screenshot.png)
 
 ## Technologies Used
 
